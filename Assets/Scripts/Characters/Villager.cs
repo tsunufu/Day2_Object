@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Villager : MonoBehaviour
+{
+    // 生成するダイアログに当たるゲームオブジェクト
+    [SerializeField]
+    GameObject dialogObject;
+    // ダイアログを生成するHierarchy上で親関係となるゲームオブジェクト
+    [SerializeField]
+    Transform canvas;
+
+    private void Start()
+    {
+
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    // ダメージを受けた際の実装例
+    /*void ダメージを受けた！()
+    {
+        SetDialog("表示するテキスト","誰が話しているか");
+    }*/
+
+    /// <summary>
+    /// ダイヤログへ文字を表示させる処理
+    /// </summary>
+    /// <param name="content">表示させる内容</param>
+    /// <param name="talker">話者</param>
+    private void SetDialog(string content, string talker)
+    {
+        // ダイアログを生成させる
+        var dialog = Instantiate(dialogObject, canvas);
+        // Dialogクラスを呼び出し、表示処理を実行する
+        dialog.GetComponent<Dialog>().DisplayDialog(content, talker);
+    }
+}
