@@ -5,13 +5,21 @@ using UnityEngine;
 /// <summary>
 /// キャラクターの種類を示すEnum「CharactorType」
 /// </summary>
+public enum CharactorType
+{
+    Monster,
+    Player,
+    Buddy,
+    Pet,
+    Villager
+}
 
 
 /// <summary>
 /// キャラクターの状態を示すEnum「CharactorState」
 /// </summary>
 
-public class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour
 {
     // 整数型の変数hpとmpを作成
     public int hp;
@@ -23,11 +31,12 @@ public class Character : MonoBehaviour
 
     // 抽象メソッドを作成（abstract, virtualどちらでも構わない）
     // 死亡処理を行うメソッド
+    public abstract void DidDead();
 
     // 攻撃処理を行うメソッド
-
+    public abstract void OnAttack();
     // ダメージ処理を行うメソッド
-
+    public abstract void AddDamage();
 
     /// <summary>
     /// ターゲットに対してY軸方向で振り向く

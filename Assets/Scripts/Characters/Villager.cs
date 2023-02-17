@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Villager : MonoBehaviour
+public class Villager : Character
 {
+    CharactorType type = CharactorType.Villager;
+
     // 生成するダイアログに当たるゲームオブジェクト
     [SerializeField]
     GameObject dialogObject;
@@ -11,14 +13,12 @@ public class Villager : MonoBehaviour
     [SerializeField]
     Transform canvas;
 
-    private void Start()
-    {
+    [SerializeField] private GameObject Player;
 
-    }
 
     private void Update()
     {
-        
+        LookYAxis(Player.transform.position);
     }
 
     // ダメージを受けた際の実装例
@@ -36,7 +36,35 @@ public class Villager : MonoBehaviour
     {
         // ダイアログを生成させる
         var dialog = Instantiate(dialogObject, canvas);
+        var interval = 3.0f;
         // Dialogクラスを呼び出し、表示処理を実行する
         dialog.GetComponent<Dialog>().DisplayDialog(content, talker);
+        Destroy(dialog, interval);
     }
+
+    public override void OnAttack()
+    {
+        
+    }
+
+    public override void AddDamage()
+    {
+        SetDialog("痛い！やめて", "村人A");
+    }
+
+    public override void DidDead()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "PlayerBullet" || other.gameObject.tag == "EnemyBullet")
+        {
+            other.gameObject.SetActive(false);
+            AddDamage();
+        }
+    }
+
+
 }

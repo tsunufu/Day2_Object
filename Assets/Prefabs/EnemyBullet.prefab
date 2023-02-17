@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5215203416647430942, guid: 20966c1a5046642d0bc5b40596d8d8f4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6349623598530478638, guid: 20966c1a5046642d0bc5b40596d8d8f4, type: 3}
       propertyPath: m_Name
       value: EnemyBullet

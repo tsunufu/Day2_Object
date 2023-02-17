@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
+    CharactorType type = CharactorType.Player;
+
     // キャラクターの移動速度
     [SerializeField]
     float moveSpeed = 3f;
@@ -20,7 +22,11 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        
+
+        hpSlider.maxValue = hp;
+
+        hpSlider.value = hp;
+
     }
 
     private void FixedUpdate()
@@ -31,6 +37,11 @@ public class Player : MonoBehaviour
     private void Update()
     {
         PlayerRotate();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnAttack();
+        }
     }
 
     /// <summary>
@@ -57,5 +68,35 @@ public class Player : MonoBehaviour
         float horizontal = rotateSpeed * Input.GetAxis("Mouse X") * Time.deltaTime;
         // Playerを回転させる
         transform.Rotate(0, horizontal, 0);
+    }
+
+    public override void OnAttack()
+    {
+        var bullet = Instantiate(fireBallBullet, this.transform);
+    }
+
+    public override void AddDamage()
+    {
+        var damage = 10;
+        hp -= damage;
+        hpSlider.value = hp;
+        if(hp <= 0)
+        {
+            DidDead();
+        }
+    }
+
+    public override void DidDead()
+    {
+        Debug.Log("playerが死んだ！");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "EnemyBullet")
+        {
+            other.gameObject.SetActive(false);
+            AddDamage();
+        }
     }
 }
