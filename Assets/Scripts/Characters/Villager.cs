@@ -42,17 +42,17 @@ public class Villager : Character
         Destroy(dialog, interval);
     }
 
-    public override void OnAttack()
+    protected override void OnAttack()
     {
         
     }
 
-    public override void AddDamage()
+    protected override void AddDamage()
     {
         SetDialog("痛い！やめて", "村人A");
     }
 
-    public override void DidDead()
+    protected override void DidDead()
     {
         
     }

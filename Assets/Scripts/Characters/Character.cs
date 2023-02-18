@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// キャラクターの種類を示すEnum「CharactorType」
@@ -18,6 +19,12 @@ public enum CharactorType
 /// <summary>
 /// キャラクターの状態を示すEnum「CharactorState」
 /// </summary>
+public enum CharactorState
+{
+    Alive,
+    Dead,
+    Stay
+}
 
 public abstract class Character : MonoBehaviour
 {
@@ -30,13 +37,14 @@ public abstract class Character : MonoBehaviour
     // EnumのCharactorStateを定義
 
     // 抽象メソッドを作成（abstract, virtualどちらでも構わない）
+    
     // 死亡処理を行うメソッド
-    public abstract void DidDead();
+    protected abstract void DidDead();
 
     // 攻撃処理を行うメソッド
-    public abstract void OnAttack();
+    protected abstract void OnAttack();
     // ダメージ処理を行うメソッド
-    public abstract void AddDamage();
+    protected abstract void AddDamage();
 
     /// <summary>
     /// ターゲットに対してY軸方向で振り向く

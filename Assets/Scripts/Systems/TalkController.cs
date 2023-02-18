@@ -36,6 +36,7 @@ public class TalkController : MonoBehaviour
     /// TalkStruct型のListを定義する
     /// </summary>
     private List<TalkStruct> talkStructs = new List<TalkStruct>();
+    private float interval = 3.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -46,10 +47,16 @@ public class TalkController : MonoBehaviour
         talkStructs.Add(new TalkStruct(4, Talker.Enemy, "がおー"));
         talkStructs.Add(new TalkStruct(5, Talker.Buddy, "うわ！ゴブリンが出てきた！"));
 
-        foreach(TalkStruct talkStruct in talkStructs)
+        StartCoroutine(StartTalk(interval));
+
+    }
+
+    private IEnumerator StartTalk(float interval)
+    {
+        foreach (TalkStruct talkStruct in talkStructs)
         {
             Debug.Log("Talker: " + talkStruct.talker + ", Contents: " + talkStruct.contents);
+            yield return new WaitForSeconds(interval);
         }
-
     }
 }

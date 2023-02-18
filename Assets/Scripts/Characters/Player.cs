@@ -70,12 +70,12 @@ public class Player : Character
         transform.Rotate(0, horizontal, 0);
     }
 
-    public override void OnAttack()
+    protected override void OnAttack()
     {
         var bullet = Instantiate(fireBallBullet, this.transform);
     }
 
-    public override void AddDamage()
+    protected override void AddDamage()
     {
         var damage = 10;
         hp -= damage;
@@ -86,7 +86,7 @@ public class Player : Character
         }
     }
 
-    public override void DidDead()
+    protected override void DidDead()
     {
         Debug.Log("playerが死んだ！");
     }
